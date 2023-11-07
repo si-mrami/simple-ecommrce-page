@@ -1,16 +1,22 @@
+@import "../../query-media.scss";
+
 .menu {
-	width: 300px;
+	width: 450px;
 	height: 100vh;
 	background-color: lightgrey;
 	position: fixed;
 	top: 0;
-	right: -300px;
+	right: -450px;
 	z-index: 99;
 	display: flex;
 	flex-direction: column;
 	padding: 1rem;
 	gap: 30px;
 	transition: all 1.5s ease;
+
+	@include phone {
+		background-color: crimson;
+	}
 
 	&.active {
 		right: 0;
@@ -21,7 +27,7 @@
 		top: 72px;
 		z-index: 99;
 		width: 40%;
-		right: 2px;
+		right: 30%;
 	}
 
 	.menuTop {

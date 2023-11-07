@@ -14,7 +14,7 @@ function App() {
 	return (
 		<div className='App'>
 			<div className="top">
-				<Topbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+				<Topbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} cart={cart}/>
 				<Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen} cart={cart} setCart={setCart} showRemoveMessage={showRemoveMessage} setShowRemoveMessage={setShowRemoveMessage} />
 			</div>
 			<Header />

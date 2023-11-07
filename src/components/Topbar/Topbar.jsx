@@ -1,9 +1,10 @@
 import './Topbar.scss';
 import logo from "../../assets/saki.jpg";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { CardText } from 'react-bootstrap';
 
 
-const Topbar = ({ menuOpen, setMenuOpen }) => {
+const Topbar = ({ menuOpen, setMenuOpen, cart }) => {
 
 	return (
 		<div className="topbar">
@@ -19,7 +20,7 @@ const Topbar = ({ menuOpen, setMenuOpen }) => {
 					<small>
 						<ShoppingCartOutlinedIcon />
 					</small>
-					<p>3</p>
+					{cart.length > 0 && <p>{cart.length}</p>}
 				</div>
 			</div>
 		</div>

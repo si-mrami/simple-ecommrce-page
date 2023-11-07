@@ -8,7 +8,7 @@
 		top: 72px;
 		z-index: 99;
 		width: 40%;
-		right: 2px;
+		right: 30%;
 	}
 
 	.items {
@@ -19,7 +19,7 @@
 		justify-content: center;
 
 		@include phone {
-			background-color: #0ff;
+			background-color: rgb(17, 176, 176);
 			display: flex;
 			justify-content: center;
 			flex-direction: column;
