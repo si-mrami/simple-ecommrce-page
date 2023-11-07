@@ -1,0 +1,26 @@
+.footer {
+	background-color: beige;
+	height: 80px;
+	display: flex;
+	padding: 1rem;
+	flex-direction: column;
+
+	.top {
+		display: flex;
+		justify-content: space-between;
+
+		.right {
+			color: darkblue;
+			display: flex;
+			cursor: pointer;
+		}
+
+	}
+
+	.bottom {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: crimson;
+	}
+}
