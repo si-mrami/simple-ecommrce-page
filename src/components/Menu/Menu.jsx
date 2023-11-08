@@ -23,7 +23,6 @@ const Menu = ({ menuOpen, setMenuOpen, cart, setCart, showRemoveMessage, setShow
 			const itemPrice = parseFloat(item.price.replace("Dh", ""));
 			return total + itemPrice;
 		}, 0.0);
-
 		const formattedTotal = totalPrice.toFixed(2) + "Dh";
 
 		return formattedTotal;
@@ -57,8 +56,7 @@ const Menu = ({ menuOpen, setMenuOpen, cart, setCart, showRemoveMessage, setShow
 										</div>
 									</div>
 									<div className="bottom">
-										<span>{item.price}.
-											<small>{item.point}</small>
+										<span>{item.price}
 											Dh
 										</span>
 									</div>

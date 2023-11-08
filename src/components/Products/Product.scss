@@ -38,10 +38,9 @@
 			border-radius: 5px;
 
 			@include sm-desktop {
-				width: 90%;
+				width: 60%;
 				padding: 0.4rem;
 			}
-
 
 
 			&:hover {
@@ -50,14 +49,24 @@
 			}
 
 			.top {
+
+				@include sm-desktop {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+
 				img {
 					width: calc(18rem - 0.6rem);
 					height: calc(18rem - 0.6rem);
 					border-radius: 5px;
 
 					@include sm-desktop {
-						width: 100%;
-						height: 20rem;
+						width: 80%;
+						object-fit: contain;
+						display: flex;
+						justify-content: center;
+						align-items: center;
 					}
 				}
 			}
@@ -73,6 +82,10 @@
 						h1 {
 							font-size: 20px;
 							padding: 0.2rem;
+
+							@include sm-desktop {
+								font-size: 26px;
+							}
 						}
 					}
 
