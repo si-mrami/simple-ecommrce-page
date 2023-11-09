@@ -4,7 +4,8 @@ import './Menu.scss';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import { Alert } from '@mui/material';
-import { Link } from 'react-router-dom';
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
 
 const Menu = ({ menuOpen, setMenuOpen, cart, setCart, showRemoveMessage, setShowRemoveMessage }) => {
 
@@ -49,6 +50,17 @@ const Menu = ({ menuOpen, setMenuOpen, cart, setCart, showRemoveMessage, setShow
 								<div className="left">
 									<img src={item.img} alt="" />
 									<span>{item.name}</span>
+								</div>
+								<div className="center">
+									<div className="left">
+										<AddCircleOutlineOutlinedIcon/>
+									</div>
+									<div className="inputQuantity">
+										<input type="text" readOnly value={1}/>
+									</div>
+									<div className="right">
+										<RemoveCircleOutlineOutlinedIcon/>
+									</div>
 								</div>
 								<div className="right">
 									<div className="top">
