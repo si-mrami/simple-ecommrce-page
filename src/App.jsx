@@ -2,7 +2,6 @@ import { useState } from 'react';
 import './App.scss';
 import Topbar from './components/Topbar/Topbar';
 import Menu from './components/Menu/Menu';
-import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Home from './Page/Home/Home';
 import ReactWhatsapp from 'react-whatsapp';
@@ -21,7 +20,6 @@ function App() {
 				<Topbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} cart={cart} />
 				<Menu menuOpen={menuOpen} setMenuOpen={setMenuOpen} cart={cart} setCart={setCart} showRemoveMessage={showRemoveMessage} setShowRemoveMessage={setShowRemoveMessage} />
 			</div>
-			<Header />
 			<div className="pagehome">
 				<BrowserRouter>
 					<Routes>
