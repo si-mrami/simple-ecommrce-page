@@ -4,6 +4,7 @@ import './Menu.scss';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import { Alert } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Menu = ({ menuOpen, setMenuOpen, cart, setCart, showRemoveMessage, setShowRemoveMessage }) => {
 
@@ -56,9 +57,7 @@ const Menu = ({ menuOpen, setMenuOpen, cart, setCart, showRemoveMessage, setShow
 										</div>
 									</div>
 									<div className="bottom">
-										<span>{item.price}
-											Dh
-										</span>
+										<span>{item.price}Dh</span>
 									</div>
 								</div>
 							</div>
@@ -70,7 +69,9 @@ const Menu = ({ menuOpen, setMenuOpen, cart, setCart, showRemoveMessage, setShow
 			</div>
 			<div className="bottom">
 				<span>Total: {calculateTotal(cart)}</span>
-				<Button variant='success'>CheckOut</Button>
+				{/* <Link to='/ConfirmOrder'> */}
+					<Button variant='success'>CheckOut</Button>
+				{/* </Link> */}
 			</div>
 		</div>
 	)

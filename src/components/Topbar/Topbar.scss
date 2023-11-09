@@ -1,3 +1,5 @@
+@import "../../query-media.scss";
+
 .topbar {
 	background-color: lightgrey;
 	display: flex;
@@ -29,10 +31,32 @@
 
 	.right {
 
+		@include sm-desktop {
+			font-size: 27px;
+		}
+
 		.cartElement {
 			color: #111;
 			cursor: pointer;
 			display: flex;
+
+			span {
+				font-weight: 700;
+				@include sm-desktop {
+					// display: none;
+					font-size: 28px;
+				}
+
+
+
+				.iconCart {
+					@include sm-desktop {
+						font-size: 20px;
+						color: #fff;
+						background-color: aqua;
+					}
+				}
+			}
 
 			p {
 				background-color: crimson;
@@ -46,6 +70,11 @@
 				justify-content: center;
 				border-radius: 50%;
 				align-items: center;
+
+				@include sm-desktop {
+					width: 1.5rem;
+					height: 1.5rem;
+				}
 			}
 		}
 	}

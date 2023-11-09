@@ -1,19 +1,20 @@
 import { useState } from 'react';
-import './App.scss'
+import './App.scss';
 import Topbar from './components/Topbar/Topbar';
 import Menu from './components/Menu/Menu';
 import Header from './components/Header/Header';
-import Product from './components/Products/Product';
 import Footer from './components/Footer/Footer';
 import Home from './Page/Home/Home';
 import ReactWhatsapp from 'react-whatsapp';
-
+import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import ComfOrder from './Page/ComfirmeOrder/ComfOrder';
 
 function App() {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [cart, setCart] = useState([]);
 	const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 	const [showRemoveMessage, setShowRemoveMessage] = useState(false);
+
 	return (
 		<div className='App'>
 			<div className="top">
@@ -22,16 +23,23 @@ function App() {
 			</div>
 			<Header />
 			<div className="pagehome">
-				<Home setCart={setCart} cart={cart} showSuccessMessage={showSuccessMessage} setShowSuccessMessage={setShowSuccessMessage} />
+				<BrowserRouter>
+					<Routes>
+						<Route path='/' element={
+							<Home setCart={setCart} cart={cart} showSuccessMessage={showSuccessMessage} setShowSuccessMessage={setShowSuccessMessage} />
+						} />
+						<Route path='/ConfirmOrder' element={<ComfOrder/>}/>
+					</Routes>
+				</BrowserRouter>
 			</div>
 			<div className="lastpage">
-				<ReactWhatsapp number="+212 682917806" meassage="Hello, Mohamed!">
+				<ReactWhatsapp number="+212 682917806" message="Hello, Mohamed!">
 					<img src="https://cdn-icons-png.flaticon.com/128/3670/3670051.png" alt="" />
 				</ReactWhatsapp>
 			</div>
 			<Footer />
 		</div>
-	)
+	);
 }
 
 export default App;

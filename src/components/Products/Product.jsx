@@ -5,56 +5,77 @@ import { Alert } from '@mui/material';
 
 const Product = ({ cart, setCart, showSuccessMessage, setShowSuccessMessage }) => {
 	const [product, setProduct] = useState(products);
-
+	const [showWarningMessage, setShowWarningMessage] = useState(false); // Add this line
 
 	const AddToCart = (productId) => {
 		const productAdd = product.find((p) => p.id === productId);
+
 		if (productAdd) {
-			setCart([...cart, productAdd]);
-			setShowSuccessMessage(true);
-			setTimeout(() => {
+			if (cart.some((item) => item.id === productId)) {
 				setShowSuccessMessage(false);
-			}, 2000);
+				setShowWarningMessage(true);
+
+				setTimeout(() => {
+					setShowWarningMessage(false);
+				}, 3000);
+			} else {
+				setCart((prevCart) => [...prevCart, productAdd]);
+				setShowSuccessMessage(true);
+
+				setTimeout(() => {
+					setShowSuccessMessage(false);
+				}, 3000);
+			}
 		}
-	}
+	};
 
 	return (
 		<div className="product">
-			{showSuccessMessage && (
+			{/* <h1>Best Series</h1> */}
+			{showSuccessMessage ? (
 				<div className="success">
-				<Alert severity="success">Product added to cart successfully!</Alert>
-			</div>
+					<Alert severity="success">Product added to cart successfully!</Alert>
+				</div>
+			) : (
+				showWarningMessage && (
+					<div className="success">
+						<Alert severity="warning">Product is already in the cart!.</Alert>
+					</div>
+				)
 			)}
 			<div className="items">
-				{product.length > 0 ? product.map((item) => (
-					(<div className="item" key={item.id}>
-						<div className="top">
-							<img src={item.img} alt="" />
-						</div>
-						<div className="bottom">
+				{product.length > 0 ? (
+					product.map((item) => (
+						<div className="item" key={item.id}>
 							<div className="top">
-								<div className="topLeft">
-									<h1>{item.name}</h1>
-								</div>
-								<div className="topRight">
-									<span>{item.price}.
-										<small>{item.point}</small>
-										dh
-									</span>
-								</div>
+								<img src={item.img} alt="" />
 							</div>
-							<div className="coneter">
-								<p>{item.desc}</p>
-							</div>
-							<div className="last" onClick={() => AddToCart(item.id)}>
-								Add To Cart
+							<div className="bottom">
+								<div className="top">
+									<div className="topLeft">
+										<h1>{item.name}</h1>
+									</div>
+									<div className="topRight">
+										<span>
+											{item.price} dh
+										</span>
+									</div>
+								</div>
+								<div className="coneter">
+									<p>{item.desc}</p>
+								</div>
+								<div className="last" onClick={() => AddToCart(item.id)}>
+									Add To Cart
+								</div>
 							</div>
 						</div>
-					</div>)
-				)) : <Alert severity="warning">Sorry!</Alert>}
+					))
+				) : (
+					<Alert severity="warning">Sorry!, Don't Have Any product.</Alert>
+				)}
 			</div>
 		</div>
-	)
-}
+	);
+};
 
-export default Product
+export default Product;
