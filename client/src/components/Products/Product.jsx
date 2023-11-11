@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Product.scss';
 import { products } from '../../Data';
 import { Alert } from '@mui/material';
+import axios from "axios";
 
 const Product = ({ cart, setCart, showSuccessMessage, setShowSuccessMessage }) => {
-	const [product, setProduct] = useState(products);
+	const [product, setProduct] = useState([]);
 	const [showWarningMessage, setShowWarningMessage] = useState(false);
 
 
@@ -29,6 +30,18 @@ const Product = ({ cart, setCart, showSuccessMessage, setShowSuccessMessage }) =
 			}
 		}
 	};
+
+	useEffect(() => {
+		const fetchProducts = async () => {
+			try {
+				const res = await axios.get("http://localhost:8080/products")
+				console.log(res);
+			} catch(err) {
+				console.log(err)
+			}
+		}
+		fetchProducts();
+	}, [])
 
 
 	return (
