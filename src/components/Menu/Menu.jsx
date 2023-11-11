@@ -6,8 +6,11 @@ import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined
 import { Alert } from '@mui/material';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
+import { useEffect, useState } from 'react';
 
 const Menu = ({ menuOpen, setMenuOpen, cart, setCart, showRemoveMessage, setShowRemoveMessage }) => {
+
+	const [totalPrice, setTotalPrice] = useState(0);
 
 	// remove from cart
 	const removeFromCart = (productId) => {
@@ -19,16 +22,44 @@ const Menu = ({ menuOpen, setMenuOpen, cart, setCart, showRemoveMessage, setShow
 		}, 2000);
 	}
 
-	// get Total price
-	const calculateTotal = (cart) => {
-		const totalPrice = cart.reduce((total, item) => {
-			const itemPrice = parseFloat(item.price.replace("Dh", ""));
-			return total + itemPrice;
-		}, 0.0);
-		const formattedTotal = totalPrice.toFixed(2) + "Dh";
+	const increaseQuantity = (productId) => {
+		const updatedCart = cart.map((item) => {
+			if (item.id === productId) {
+				let quantity = item.quantity + 1;
+				item.quantity = quantity;
+				item.totalPrice = (parseFloat(item.price.replace("Dh", "")) * quantity).toFixed(2) + "Dh";
+			}
+			return item;
+		});
 
-		return formattedTotal;
+		setCart(updatedCart);
 	};
+
+	const decreaseQuantity = (productId) => {
+		const updatedCart = cart.map((item) => {
+			if (item.id === productId) {
+				let quantity = item.quantity - 1;
+				if (quantity >= 1) {
+					item.quantity = quantity;
+					item.totalPrice = (parseFloat(item.price.replace("Dh", "")) * quantity).toFixed(2) + "Dh";
+				}
+			}
+			return item;
+		});
+
+		setCart(updatedCart);
+	};
+
+
+	useEffect(() => {
+		const newTotalPrice = cart.reduce((total, item) => {
+			const itemPrice = parseFloat(item.price.replace("Dh", ""));
+			return total + itemPrice * item.quantity;
+		}, 0);
+
+		setTotalPrice(newTotalPrice.toFixed(2));
+	}, [cart]);
+
 
 	return (
 		<div className={'menu ' + (menuOpen && "active")}>
@@ -52,14 +83,14 @@ const Menu = ({ menuOpen, setMenuOpen, cart, setCart, showRemoveMessage, setShow
 									<span>{item.name}</span>
 								</div>
 								<div className="center">
-									<div className="left">
-										<AddCircleOutlineOutlinedIcon/>
+									<div className="right" onClick={() => decreaseQuantity(item.id)}>
+										<RemoveCircleOutlineOutlinedIcon />
 									</div>
 									<div className="inputQuantity">
-										<input type="text" readOnly value={1}/>
+										<input type="text" readOnly value={item.quantity} />
 									</div>
-									<div className="right">
-										<RemoveCircleOutlineOutlinedIcon/>
+									<div className="left" onClick={() => increaseQuantity(item.id)}>
+										<AddCircleOutlineOutlinedIcon />
 									</div>
 								</div>
 								<div className="right">
@@ -69,6 +100,9 @@ const Menu = ({ menuOpen, setMenuOpen, cart, setCart, showRemoveMessage, setShow
 										</div>
 									</div>
 									<div className="bottom">
+										<div className='numberofquantity'>{item.quantity}
+										<small>X</small>
+										</div>
 										<span>{item.price}Dh</span>
 									</div>
 								</div>
@@ -79,14 +113,14 @@ const Menu = ({ menuOpen, setMenuOpen, cart, setCart, showRemoveMessage, setShow
 					<Alert severity="warning">Your cart is empty.</Alert>
 				)}
 			</div>
-			<div className="bottom">
-				<span>Total: {calculateTotal(cart)}</span>
+			<div className="btncheckout">
+				<span>Total: {totalPrice} Dh</span>
 				{/* <Link to='/ConfirmOrder'> */}
-					<Button variant='success'>CheckOut</Button>
+				<Button variant='success'>CheckOut</Button>
 				{/* </Link> */}
 			</div>
 		</div>
 	)
 }
 
-export default Menu
+export default Menu;

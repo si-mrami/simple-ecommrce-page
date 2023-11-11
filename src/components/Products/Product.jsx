@@ -5,23 +5,24 @@ import { Alert } from '@mui/material';
 
 const Product = ({ cart, setCart, showSuccessMessage, setShowSuccessMessage }) => {
 	const [product, setProduct] = useState(products);
-	const [showWarningMessage, setShowWarningMessage] = useState(false); // Add this line
+	const [showWarningMessage, setShowWarningMessage] = useState(false);
 
+
+// Add to Cart
 	const AddToCart = (productId) => {
 		const productAdd = product.find((p) => p.id === productId);
 
 		if (productAdd) {
-			if (cart.some((item) => item.id === productId)) {
-				setShowSuccessMessage(false);
+			const productAlreadyInCart = cart.find((item) => item.id === productId);
+			if (productAlreadyInCart) {
 				setShowWarningMessage(true);
-
 				setTimeout(() => {
 					setShowWarningMessage(false);
 				}, 3000);
-			} else {
-				setCart((prevCart) => [...prevCart, productAdd]);
-				setShowSuccessMessage(true);
 
+			} else {
+				setCart((prevCart) => [...prevCart, { ...productAdd, quantity: 1 }]);
+				setShowSuccessMessage(true);
 				setTimeout(() => {
 					setShowSuccessMessage(false);
 				}, 3000);
@@ -29,9 +30,9 @@ const Product = ({ cart, setCart, showSuccessMessage, setShowSuccessMessage }) =
 		}
 	};
 
+
 	return (
 		<div className="product">
-			{/* <h1>Best Series</h1> */}
 			{showSuccessMessage ? (
 				<div className="success">
 					<Alert severity="success">Product added to cart successfully!</Alert>
